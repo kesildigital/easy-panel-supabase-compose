@@ -356,6 +356,8 @@ services:
   db:
     image: supabase/postgres:15.8.1.060
     restart: unless-stopped
+    ports:
+      - "5432:5432"
     volumes:
       - ./volumes/db/realtime.sql:/docker-entrypoint-initdb.d/migrations/99-realtime.sql:Z
       # Must be superuser to create event trigger
@@ -432,8 +434,6 @@ services:
     restart: unless-stopped
     volumes:
       - ./volumes/pooler/pooler.exs:/etc/pooler/pooler.exs:ro,z
-    ports:
-      - "6543:6543"
     healthcheck:
       test:
         [
